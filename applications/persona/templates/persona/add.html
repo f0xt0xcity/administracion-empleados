@@ -1,0 +1,47 @@
+{% extends 'home/base.html' %}
+{% load static %}
+
+{%block title%}Registrar nuevo empleado{%endblock%}
+
+{%block content%}
+    {% include 'home/header.html' %}
+    <div class="grid-container">
+        <div class="grid-x">
+            <h1 class="cell">Registrar persona</h1>
+            <form class="cell" method="POST" enctype="multipart/form-data">{% csrf_token %}
+                <div class="medium-6 cell">
+                    <label>Nombres:
+                        {{form.first_name}}
+                    </label>
+                </div>
+                <div class="medium-6 cell">
+                    <label>Apellidos:
+                        {{form.last_name}}
+                    </label>
+                </div>
+                <div class="medium-6 cell">
+                    <label>Trabajo:
+                         {{form.job}}
+                    </label>
+                </div>
+                <div class="medium-6 cell">
+                    <label>Departamento:
+                        {{form.departamento}}
+                    </label>
+                </div>
+                <div class="medium-6 cell">
+                    <label>Habilidades:
+                        {{form.habilidades}}
+                    </label>
+                </div>
+                <div class="medium-6 cell">
+                    <label>Imagen:
+                        {{form.avatar}}
+                    </label>
+                </div>
+                <button type="submit" class="submit success button cell">Agregar</button>
+            </form>
+        </div>
+    </div>
+{%endblock%}
+

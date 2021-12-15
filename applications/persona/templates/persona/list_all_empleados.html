@@ -1,0 +1,76 @@
+{% extends 'home/base.html' %}
+{% load static %}
+
+{%block title%}Lista empleados admin{%endblock%}
+
+
+{%block content%}
+    {%include 'home/header.html'%}
+    <div class="grid-container">
+            <div class="grid-x">
+                <h1 class="cell">Lista empleados</h1>
+                <form class="cell grid-x grid-margin-x" method="GET">
+                    <div class="cell large-7">
+                        <input type="text" id="kword" name="kword" placeholder="Buscar Empleado">
+                    </div>
+                    <div class="cell large-2">
+                        <button class="submit success button">Buscar</button>
+                    </div>
+                </form>
+                <div class="cell">
+                    <table>
+                    <thead>
+                        <tr>
+                        <th width="200">Id</th>
+                        <th>Nombres</th>
+                        <th width="150">Apellido</th>
+                        <th width="150">Departamento</th>
+                        <th width="150">Accion</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for empleado in Empleados %}
+                            <tr>
+                            <td>{{empleado.id}}</td>
+                            <td>{{empleado.first_name}}</td>
+                            <td>{{empleado.last_name}}</td>
+                            <td>{{empleado.departamento}}</td>
+                            <td>
+                                <a class="button primary" href="{% url 'persona_app:update' empleado.id %}">Editar</a>
+                            </td>
+                            <td>
+                                <a class="button alert" href="{% url 'persona_app:delete' empleado.id %}">Eliminar</a>
+                            </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                    </table>
+                </div>
+                <div class="cell">
+                {% if is_paginated %}
+                    <nav aria-label="Pagination">
+                    <ul class="pagination">
+                        {% if page_obj.has_previous %}
+                        <li class="pagination-previous">
+                            <a href="?page={{page_obj.previous_page_number}}">Atras</a>
+                        </li>
+                        {% endif %}
+                        {% for pagina in paginator.page_range %}
+                            {% ifequal  pagina page_obj.number %}
+                                    <li class="current"><span class="show-for-sr">Estas en la pagina</span> {{pagina}}</li>
+                                    {% else %}
+                                    <li><a href="?page={{pagina}}" aria-label="Page 2">{{pagina}}</a></li>
+                            {% endifequal %}
+                        {% endfor %}
+                        {% if page_obj.has_next %}
+                            <li class="pagination-next">
+                                <a href="?page={{page_obj.next_page_number}}" aria-label="Next page">Siguiente </a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                    </nav>
+                {% endif %}
+                </div>
+            </div>
+    </div>
+{%endblock%}

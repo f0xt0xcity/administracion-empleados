@@ -1,0 +1,40 @@
+{% extends 'home/base.html' %}
+{% load static%}
+
+{%block title%}Añadir departamento{%endblock%}
+
+{%block content%}
+    {% include 'home/header.html' %}
+    <div class="grid-container">
+        <div class="grid-x">
+            <h1 class="cell">Registrar empleado</h1>
+            <form method="POST" class="callout small cell">{% csrf_token %}
+                <div class="grid-container">
+                <div class="grid-x grid-padding-x">
+                <div class="medium-6 cell">
+                    <label>Nombres:
+                        {{form.nombre}}
+                    </label>
+                </div>
+                <div class="medium-6 cell">
+                    <label>Apellidos:
+                        {{form.apellidos}}
+                    </label>
+                </div>
+                <div class="medium-6 cell">
+                    <label>Departamento:
+                        {{form.departamento}}
+                    </label>
+                </div>
+                <div class="medium-6 cell">
+                    <label>Shor name:
+                        {{form.shorname}}
+                    </label>
+                </div>
+                </div>
+            </div>
+                <button type="submit" class="submit success button">Enviar</button>
+            </form>
+        </div>
+    </div>
+{%endblock%}
